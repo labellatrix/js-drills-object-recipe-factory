@@ -1,0 +1,32 @@
+function recipeFactory(name, ingredients, steps) {
+    return {
+        name: name,
+        ingredients: ingredients,
+        steps: steps,
+        stepsHtml: function () {
+            return '<ol>' + this.steps.map(
+                function (step) {
+                    return '<li>' + step + '</li>';
+                }).join('') + '</ol>';
+        },
+        ingredientsHtml: function () {
+            return '<ul>' + this.ingredients.map(
+                function (ing) {
+                    return '<li>' + ing + '</li>';
+                }).join('') + '</ul>';
+        }
+    }
+}
+
+
+function testRecipeFactory() {
+    var grilledCheese = recipeFactory(
+        'grilled cheese', ['2 slices bread', 'butter', '1 slice cheese'], ['Butter bread', 'Put cheese between bread', 'Toast bread on stove']
+    );
+    $('.js-recipe-name').text(grilledCheese.name);
+    $('.js-ingredients').html(grilledCheese.ingredientsHtml());
+    $('.js-steps').html(grilledCheese.stepsHtml());
+
+}
+
+testRecipeFactory()
